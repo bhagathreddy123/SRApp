@@ -7,13 +7,21 @@ Rails.application.routes.draw do
     resources :dashboards 
   end
   namespace :admin do 
+    resources :students do
+      get :assign_subject
+      member do
+        get :assign_class
+        post :assign_teacherclass
+      end
+    end 
+    resources :attendances
     resources :dashboards 
+    resources :batches
   end 
   resources :homes
   root 'homes#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

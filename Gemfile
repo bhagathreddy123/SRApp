@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.0.0'
 group :development do
   gem "better_errors"
 end
+gem "nested_form"
 gem "binding_of_caller"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'devise'
@@ -30,7 +31,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
-
+gem 'bootstrap-multiselect-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
