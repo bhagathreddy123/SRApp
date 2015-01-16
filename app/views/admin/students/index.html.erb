@@ -14,7 +14,6 @@
         <td>
           <%=  link_to "Delete",admin_student_path(u,:admin_id => current_admin.id),:method => :delete,:data => {:confirm => "are you sure"},:class=>"btn btn-danger"%>
           <%=  link_to "Assign","#", :onclick => "assign_class_admin_student(#{u.id})", :class => "btn btn-default" %>
-          <%= link_to "Evalute", "#", :onclick => "assign_class_admin_student(#{u.id})", :class => 'btn btn-r', :style => 'width: 65px;' %>
         </td>
       </tr>
     <%end%>

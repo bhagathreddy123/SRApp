@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :web_admins
   namespace :web_admin do 
     resources :dashboards 
+    resources :schools
   end
   namespace :admin do 
     resources :students do
