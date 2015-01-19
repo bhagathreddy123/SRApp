@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :attendances
     resources :dashboards 
     resources :batches
+    resources :markreports
   end 
   resources :homes
   root 'homes#index'
