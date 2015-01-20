@@ -9,7 +9,7 @@ class Admin::BatchesController < ApplicationController
   end
   
   def index
-    @batches = Batch.where("admin_id= #{current_admin.id}")
+     @batches = Batch.where("admin_id = #{current_admin.id}")
   end
   
   def create
@@ -32,3 +32,4 @@ class Admin::BatchesController < ApplicationController
     params.require(:batch).permit!
   end
 end
+
