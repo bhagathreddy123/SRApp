@@ -5,7 +5,14 @@ Rails.application.routes.draw do
   devise_for :web_admins
   namespace :web_admin do 
     resources :dashboards 
-    resources :schools
+    resources :schools 
+    resources :profiles do
+      member do
+        get :change_password 
+        put :reset_password
+        put :reset_email
+      end
+    end
   end
   namespace :admin do 
     resources :students do
@@ -19,8 +26,20 @@ Rails.application.routes.draw do
     resources :dashboards 
     resources :batches
     resources :markreports
+    resources :profiles do
+      member do
+        get :change_password
+        put :reset_password
+      end
+    end
   end 
-  resources :homes
+  resources :homes 
+  resources :users do
+    member do
+      get :change_password 
+       put :reset_password
+    end
+  end
   root 'homes#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

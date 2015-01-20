@@ -47,7 +47,8 @@ class Admin::StudentsController < ApplicationController
     @user.admin_id = @admin.id
     if params[:subject_ids]
       params[:subject_ids].compact.each do |ami|
-        @assign_class = StudentsBatch.find_by_batch_id_and_subject_id(params[:batch_id],ami)
+        @assign_class = StudentsBatch.find_by_user_id_and_subject_id(@user.id,ami)
+        
         if !@assign_class.present? and ami.present? 
           @assign_class= StudentsBatch.new(:batch_id => params[:batch_id],:subject_id => ami,:admin_id => params[:admin_id],:user_id => params[:id]) 
           @assign_class.save
@@ -61,8 +62,9 @@ class Admin::StudentsController < ApplicationController
   
   
   def assign_subject
-    @subjects = Subject.where("assign is null and batch_id = ?", params[:batch_id])
+    @subjects = Subject.where("batch_id = ?", params[:batch_id])
   end
+  
   private
   def user_params
     params.require(:user).permit!

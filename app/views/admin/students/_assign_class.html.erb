@@ -11,7 +11,7 @@
         <div class="column">
           <p> <label> Class: </label>                                                                                                                                                   
   <%#= f.select :batch_id, options_for_select([["Select", ""]] + Batch.all.map{|ic| [ic.batch_name,ic.id]}), :onchange => "GetSubjects(this.value)", :class => "form-control" %>
-            <%= select_tag :batch_id,  options_for_select([["Select", ""]] + Batch.where("status is null and admin_id=?",current_admin.id).map{|ic| [ic.batch_name,ic.id]}), :onchange => "GetSubjects(this.value)" %>
+            <%= select_tag :batch_id,  options_for_select([["Select", ""]] + Batch.where("status is null and admin_id=?",current_admin.id).map{|ic| [ic.batch_name,ic.id]}), :onchange => "GetSubjects(#{@user.id},this.value)" %>
           </p>
         </div>
         <div class="column" id="subjects">
@@ -28,9 +28,9 @@
   </div>
 
   <script>
-    function GetSubjects(sub) {
+    function GetSubjects(user,sub) {
       $.ajax({
-        url: "/admin/students/" + sub + "/assign_subject/",
+        url: "/admin/students/" + user + "/assign_subject/",
         method: "GET",
         dataType: "script",
         data: {

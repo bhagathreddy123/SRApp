@@ -1,5 +1,6 @@
 <p> <label> Subject: </label>
-  <%= select_tag "subject_ids[]", options_for_select([["Select", ""]] + @subjects.map{|ic| [ic.subject_name,ic.id]}),{:class=>'multiselect-all',:multiple=>'true'} %>
+  <% subjs = StudentsBatch.where("user_id = #{params[:student_id]} and batch_id = #{params[:batch_id]}") %>
+  <%= select_tag "subject_ids[]", options_for_select([["Select", ""]] + @subjects.map{|ic| [ic.subject_name,ic.id]}, :selected => subjs.all.map{|a| a.subject_id}),{:class=>'multiselect-all',:multiple=>'true'} %>
 </p>
 <script type="text/javascript">
   $(document).ready(function() {
