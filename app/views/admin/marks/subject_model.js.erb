@@ -1,0 +1,6 @@
+child_id = "<%= params[:child_id]  %>"
+<% if params[:child_id] == "add_model"  %>
+  $("#"+child_id).html('<%= escape_javascript render :partial => "admin/marks/load_models_add" %>');
+<% end %>
+  
+  

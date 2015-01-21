@@ -48,19 +48,16 @@ class Admin::StudentsController < ApplicationController
     if params[:subject_ids]
       params[:subject_ids].compact.each do |ami|
         @assign_class = StudentsBatch.find_by_user_id_and_subject_id(@user.id,ami)
-        
         if !@assign_class.present? and ami.present? 
           @assign_class= StudentsBatch.new(:batch_id => params[:batch_id],:subject_id => ami,:admin_id => params[:admin_id],:user_id => params[:id]) 
-          @assign_class.save
+          @assign_class.save 
           @assign_class.subject.update_attribute(:assign, "Assigned")
         end
       end
     end
     flash[:notice] = "Successfully assign Subject to User"
   end
-  
-  
-  
+      
   def assign_subject
     @subjects = Subject.where("batch_id = ?", params[:batch_id])
   end
@@ -72,5 +69,6 @@ class Admin::StudentsController < ApplicationController
 
 
 end
+
 
 

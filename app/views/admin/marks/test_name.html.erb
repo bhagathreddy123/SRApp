@@ -1,0 +1,86 @@
+
+<div >
+  <h3>New Mark List</h3>
+  <%= form_for  @test, :url =>  admin_marks_path, :method => "POST" do |f| %> 
+    <ul class="errors"></ul>
+    <%= hidden_field_tag :user_id,@user_id %>
+    <%= hidden_field_tag :admin_id,@admin_id %>
+    <%= hidden_field_tag :batch_id,@batch_id %>
+    <%= hidden_field_tag :subject_id,@subject_id %>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= f.select :batch_id, options_for_select([["Select Batch", ""]] + Batch.where("admin_id=?",current_admin.id).map{|batch| [batch.batch_name,batch.id]}),{},:class => "form-control", :id => "batch_id", :onchange => "load_all(this)" %> 
+        </div>  </div>
+    </div>
+    <br/>
+
+    <div id="add_model">
+      <%= render :partial => "admin/marks/load_models_add" %>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= f.text_field :exam_name,:placeholder => "Add New Test/Exam Name",:class => "form-control"  %>
+        </div>  
+      </div> 
+    </div> 
+    <br/>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= f.text_field :exam_date,:placeholder => "Date",  :class=>"form-control datepicker" %>
+        </div> 
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= f.label :Maxmarks, class: "control-label" %>
+            <%= f.text_field :max_marks %>
+          </div> 
+        </div>
+      </div>
+
+
+      <div class="control-action">
+        <%= f.submit "add", class: "btn btn-primary" %>
+        </div>
+      <% end %> 
+    </div>
+    <script>
+      $(function() {
+        $(".datepicker").datepicker({
+          format: 'dd-mm-yyyy',
+          todayHighlight: true,
+          todayBtn: 'linked',
+          autoclose: true
+        });
+      });
+    </script> 
+
+
+
+
+    <script>
+      function load_all(obj) {
+        var batch_id = obj.value;
+        $.ajax({
+          url: "/admin/marks/subject_model",
+          dataType: "Script",
+          type: "GET",
+          data: {
+            batch_id: batch_id,
+            child_id: "add_model"
+          }
+        });
+      }
+    </script> 
+

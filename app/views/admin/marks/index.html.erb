@@ -1,0 +1,29 @@
+<table class=" table table-striped">
+  <tr>
+    <th>Batch</th>
+    <th>Subject</th>
+    <th>TestName</th>
+    <th>ExamDate</th> 
+    <th>Max Marks</th>
+    <th>Actions</th>
+  </tr> 
+  <%@tests.each do |test|%>
+    <tr>
+      <td>
+        <% if test.batch.present? %> 
+          <%= test.batch.batch_name %>
+        <% end %>
+      </td> 
+      <td>
+        <%= test.subject.subject_name if test.subject.present? %>
+      </td>
+      <td><%= test.exam_name %> </td>
+      <td><%= test.exam_date.strftime("%d/%m/%Y") %> </td> 
+      <td><%= test.max_marks %>
+      <td><%= link_to "Delete",admin_mark_path(test),:method => :delete, :data => {:confirm => "are you sure"},:class=> "btn btn-danger" %> </td>
+    </tr>
+  <%end%>
+</table>
+<%= link_to "New",  test_name_admin_mark_path(:id=>current_admin.id) %>
+
+

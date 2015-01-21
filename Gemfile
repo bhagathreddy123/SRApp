@@ -21,8 +21,12 @@ gem "binding_of_caller"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'devise'
 gem 'will_paginate'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+  :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'thin'
+gem 'quiet_assets'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

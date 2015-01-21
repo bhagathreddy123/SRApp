@@ -26,6 +26,15 @@ Rails.application.routes.draw do
     resources :dashboards 
     resources :batches
     resources :markreports
+    resources :marks do 
+      collection do
+        get :subject_model
+      end
+      member do
+        get :test_name
+      end
+    end
+    
     resources :profiles do
       member do
         get :change_password
