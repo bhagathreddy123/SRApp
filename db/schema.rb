@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121122906) do
+ActiveRecord::Schema.define(version: 20150122065812) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20150121122906) do
     t.date     "today_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "from_date"
+    t.datetime "to_date"
   end
 
   create_table "batches", force: true do |t|
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 20150121122906) do
     t.integer  "markrepot_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "test_id"
   end
 
   create_table "students_batches", force: true do |t|

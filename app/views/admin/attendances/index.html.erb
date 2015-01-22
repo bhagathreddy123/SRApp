@@ -1,0 +1,26 @@
+<table class=" table table-striped">
+  <tr>
+    <th>Batch</th>
+    <th>Subject</th>
+    <th>FromDate</th>
+    <th>ToDate</th> 
+    <th>Actions</th>
+  </tr> 
+  <%@attendances.each do |attendance|%>
+    <tr>
+      <td>
+        <% if attendance.batch.present? %> 
+          <%= attendance.batch.batch_name %>
+        <% end %>
+      </td> 
+      <td>
+        <%= attendance.subject.subject_name if attendance.subject.present? %>
+      </td>
+      <td><%= attendance.from_date.strftime("%d/%m/%Y") %> </td>
+      <td><%= attendance.to_date.strftime("%d/%m/%Y") %> </td> 
+
+      <td><%#= link_to "Delete",admin_attendance_path(attendance),:method => :delete, :data => {:confirm => "are you sure"},:class=> "btn btn-danger" %> </td>
+    </tr>
+  <%end%>
+</table>
+<%= link_to "New",  list_admin_attendance_path(:id=>current_admin.id) %>

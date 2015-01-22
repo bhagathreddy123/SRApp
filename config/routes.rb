@@ -22,16 +22,25 @@ Rails.application.routes.draw do
         post :assign_teacherclass
       end
     end 
-    resources :attendances
+    resources :attendances do 
+      collection do
+        get :add_edit
+      end
+      member do
+        get :list
+      end
+    end
     resources :dashboards 
     resources :batches
-    resources :markreports
     resources :marks do 
       collection do
         get :subject_model
+        post :create_test
+        get :list
       end
       member do
         get :test_name
+        get :add_edit
       end
     end
     

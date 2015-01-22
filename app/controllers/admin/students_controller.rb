@@ -46,6 +46,8 @@ class Admin::StudentsController < ApplicationController
     @admin = Admin.find(params[:admin_id])
     @user.admin_id = @admin.id
     if params[:subject_ids]
+      @assigns = StudentsBatch.where("user_id = #{@user.id} and batch_id = #{params[:batch_id]}")
+      @assigns.destroy_all if @assigns.present?
       params[:subject_ids].compact.each do |ami|
         @assign_class = StudentsBatch.find_by_user_id_and_subject_id(@user.id,ami)
         if !@assign_class.present? and ami.present? 

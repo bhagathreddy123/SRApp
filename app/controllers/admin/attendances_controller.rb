@@ -1,37 +1,40 @@
 class Admin::AttendancesController < ApplicationController
 
-  def new
- @user = User.find(params[:id])
-    @user.admin_id = current_admin.id
-       @attendence = Attendance.new
-    render :layout => false
-#    @user_id = params[:user_id]
-#    @batch_id = params[:batch_id]
-#    @subject_id = params[:subject_id]
-#    @receiver_id = params[:receiver_id]
-
+  def add_edit
+     @attendance  = Attendance.new  
+       @batches = Batch.all
+    @subjects =  Subject.where("batch_id=?",params[:batch_id])
+     @users = User.where("admin_id=?",current_admin.id)
   end
   
+  def list
+    @attendances  = Attendance.all
+    @batches = Batch.all
+    @subjects =  Subject.where("batch_id=?",params[:batch_id])
+    @users = User.where("admin_id=?",current_admin.id)
+  end
+   
   def create
-    @admin = Admin.find(params[:admin_id])
-    @attendence.admin_id = current_admin.id
-    @attendence = Attendance.new(params[:attendance])
-    @attendence.admin_id = @admin.id
-    @attendence.batch_id = params[:batch_id]
-    @attendence.user_id = params[:user_id]
-    @attendence.subject_id = params[:subject_id]
-    @attendence.receiver_id = params[:receiver_id]
-    if @attendence.save
-      flash[:notice] = "Giving Attendance Successfully"
-      redirect_to admin_attendances
+    @attendance = Attendance.new(attendance_params.merge(:subject_id => params[:subject_id]))
+    @subjects =  Subject.where("batch_id=?",params[:batch_id])
+    if @attendance.save
+      redirect_to admin_attendances_path
     else
-      flash[:notice] = "Attendance Given Failure"
-      render :new
+      render "new"
     end
   end
   
   def index
-    @user = User.find(params[:receiver_id])
-    @attendence_reports = Attendance.where("receiver_id = #{params[:receiver_id]}")
+    # @user = User.find(params[:receiver_id])
+    # @attendence_reports = Attendance.where("receiver_id = #{params[:receiver_id]}")
+    @attendances = Attendance.all
+    @users = User.all
   end
+  
+  private
+  
+  def attendance_params
+    params.require(:attendance).permit!
+  end
+  
 end

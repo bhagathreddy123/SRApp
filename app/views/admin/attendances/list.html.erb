@@ -1,0 +1,90 @@
+
+<div> 
+  <div class="col-sm-6">
+
+ 
+      <%= hidden_field_tag :user_id,@user_id %>
+      <%= hidden_field_tag :admin_id,@admin_id %>
+      <%= hidden_field_tag :batch_id,@batch_id %>
+      <%= hidden_field_tag :subject_id,@subject_id %>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= select_tag :batch_id, options_for_select([["Select Batch", ""]] + Batch.where("admin_id=?",current_admin.id).map{|batch| [batch.batch_name,batch.id]}),:class => "form-control", :id => "batch_id", :onchange => "load_all(this)" %> 
+          </div>  </div>
+      </div>
+      <br/>
+
+      <div id="add_model">
+        <%= render :partial => "admin/marks/load_models_add" %>
+      </div>
+
+      Total No.of Students : <%=  User.where("admin_id=?",current_admin.id).count %> <br/> <br/>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= text_field_tag :from_date,:class => "form-control datepicker"  %>
+          </div>  
+        </div> 
+      </div> 
+      <br/>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= text_field_tag :to_date,  :class=>"form-control datepicker",:placeholder => "To Date" %>
+          </div> 
+        </div>
+      </div>
+  <%#= f.select :user_id,options_for_select([["Select", ""]] + User.where("admin_id=?",current_admin.id).map{|user|[user.name,user.id]}) %>
+      <div class="control-action">
+       
+        </div>
+     
+    </div>
+
+    <div class="col-sm-6">
+      <table class=" table table-striped">
+        <tr>
+          <th>S.No</th>
+          <th>Students</th>
+        </tr> 
+        <%@users.each_with_index do |user,index|%>
+          <tr>
+            <td><%= index+1 %> </td>
+            <td><%= user.name %> </td> 
+          </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>  
+
+
+
+
+  <script>
+    $(function() {
+      $(".datepicker").datepicker({
+        format: 'dd-mm-yyyy',
+        todayHighlight: true,
+        todayBtn: 'linked',
+        autoclose: true
+      });
+    });
+
+    function load_all(obj) {
+      var batch_id = obj.value;
+      $.ajax({
+        url: "/admin/marks/subject_model",
+        dataType: "Script",
+        type: "GET",
+        data: {
+          batch_id: batch_id,
+          child_id: "add_model"
+        }
+      });
+    }
+
+  </script> 
+
