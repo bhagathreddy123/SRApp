@@ -1,6 +1,6 @@
 <div>
-   <div class="col-sm-6">
-  <h3> Mark List</h3>
+  <div class="col-sm-6">
+    <h3> Mark List</h3>
 
     <ul class="errors"></ul>
     <%= hidden_field_tag :user_id,@user_id %>
@@ -28,52 +28,55 @@
         <div class="form-group">
           <%= select_tag :test_id, options_for_select([["Select Test", ""]] + Test.all.map{|test| [test.exam_name,test.id]}), :class=>"form-control" %>
         </div>  
-      </div> 
+         </div> 
     </div> 
     <br/>
 
- 
+  </div>
+  <div class="col-sm-6">
+    <table class=" table table-striped">
+      <tr>
+        <th>S.No</th>
+        <th>Students</th> 
+        <th><%#= test.exam_date %> </th>
+        <th>Rank</th>
+      </tr> 
+      <%@users.each_with_index do |user,index|%>
+        <tr>
+          <td><%= index+1 %> </td>
+          <td><%= user.name %> </td>  
+          <td><%=  %> </td>
+          <td><%=  %> </td> 
+        </tr>
+      <%end%>
+    </table>
+  </div>
+
 </div>
-      <div class="col-sm-6">
-        <table class=" table table-striped">
-          <tr>
-            <th>S.No</th>
-            <th>Students</th>
-          </tr> 
-          <%@users.each_with_index do |user,index|%>
-            <tr>
-              <td><%= index+1 %> </td>
-              <td><%= user.name %> </td> 
-            </tr>
-          <%end%>
-        </table>
-      </div>
-
-    </div>
 
 
 
-    <script>
-      $(function() {
-        $(".datepicker").datepicker({
-          format: 'dd-mm-yyyy',
-          todayHighlight: true,
-          todayBtn: 'linked',
-          autoclose: true
-        });
-      });
+<script>
+  $(function() {
+    $(".datepicker").datepicker({
+      format: 'dd-mm-yyyy',
+      todayHighlight: true,
+      todayBtn: 'linked',
+      autoclose: true
+    });
+  });
 
-      function load_all(obj) {
-        var batch_id = obj.value;
-        $.ajax({
-          url: "/admin/marks/subject_model",
-          dataType: "Script",
-          type: "GET",
-          data: {
-            batch_id: batch_id,
-            child_id: "add_model"
-          }
-        });
+  function load_all(obj) {
+    var batch_id = obj.value;
+    $.ajax({
+      url: "/admin/marks/subject_model",
+      dataType: "Script",
+      type: "GET",
+      data: {
+        batch_id: batch_id,
+        child_id: "add_model"
       }
-    </script> 
+    });
+  }
+</script> 
 
