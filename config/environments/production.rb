@@ -72,7 +72,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Disable automatic flushing of the log to improve performance.
-   config.autoflush_log = false
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'https://sr-app.herokuapp.com' }
   config.action_mailer.smtp_settings = {
@@ -92,4 +92,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 end
 
- 
+
