@@ -25,3 +25,4 @@ class WebAdmin::SchoolsController < ApplicationController
 
 end
 
+
