@@ -5,3 +5,4 @@ class WebAdmin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
        has_many :admins, :dependent => :destroy
 end
+

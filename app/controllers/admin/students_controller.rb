@@ -25,6 +25,7 @@ class Admin::StudentsController < ApplicationController
     end
   end
   
+
   def destroy
     @admin = Admin.find(params[:admin_id])
     @user = User.find(params[:id])
