@@ -23,6 +23,10 @@ test:
   database: SRAPP_test
 
 production:
-  <<: *default
-  database: SRAPP_production
+  adapter: postgresql
+  encoding: unicode
+  database: sr-app_production
+  pool: 5
+  username: username
+  password: password
 
