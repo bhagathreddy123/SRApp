@@ -75,7 +75,7 @@ Rails.application.configure do
   # config.autoflush_log = false
  config.active_support.deprecation = :notify
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'http://srapp.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'https://sr-app.herokuapp.com' }
   config.action_mailer.smtp_settings = {
     :address => 'smtp.gmail.com',
     #    :domain => 'gmail.com',
@@ -85,8 +85,6 @@ Rails.application.configure do
     :authentication => 'plain',
     :enable_starttls_auto => true
   }
-  
- 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
