@@ -16,5 +16,6 @@ class Admin::ProfilesController < ApplicationController
     else
       render :action => 'change_password'
     end
-  end
+  end 
+  
 end

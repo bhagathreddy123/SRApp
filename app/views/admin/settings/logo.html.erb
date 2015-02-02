@@ -1,0 +1,11 @@
+
+<%= form_for @admin, :url=>  update_logo_admin_setting_path(@admin), :method => "put" do |f| %>
+<div>
+  <%=f.file_field :logo%> <br/>
+<%= f.submit "Upload"  %>
+  
+</div>
+
+<%end%>
+
+

@@ -22,6 +22,17 @@ Rails.application.routes.draw do
         post :assign_teacherclass
       end
     end 
+    resources :settings do
+      collection do
+        get :account_details
+        get :logo
+      end
+      member do
+        put :update_logo
+      end
+      
+    end
+    
     resources :attendances do 
       collection do
         get :add_edit
@@ -29,7 +40,7 @@ Rails.application.routes.draw do
       member do
         get :list
       end
-    end
+    end 
     resources :dashboards 
     resources :batches
     resources :marks do 
